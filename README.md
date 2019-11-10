@@ -3,6 +3,8 @@
 
 [![](https://images.microbadger.com/badges/version/wonderfall/nextcloud.svg)](http://microbadger.com/images/wonderfall/nextcloud "Get your own version badge on microbadger.com") [![](https://images.microbadger.com/badges/image/wonderfall/nextcloud.svg)](http://microbadger.com/images/wonderfall/nextcloud "Get your own image badge on microbadger.com")
 
+**Unfortunately, the wonderfall / nextcloud repository is rarely updated. So I made a copy and I will continue to develop this container. Thank you goes to wonderfall**
+
 **This image was made for my own use and I have no intention to make this official. Support won't be regular so if there's an update, or a fix, you can open a pull request. Any contribution is welcome, but please be aware I'm very busy currently. Before opening an issue, please check if there's already one related. Also please use Github instead of Docker Hub, otherwise I won't see your comments. Thanks.**
 
 ### Features
@@ -15,14 +17,16 @@
 - system cron task running.
 - MySQL, PostgreSQL (server not built-in) and sqlite3 support.
 - Redis, FTP, SMB, LDAP, IMAP support.
+- imagick for php extension
 - GNU Libiconv for php iconv extension (avoiding errors with some apps).
 - No root processes. Never.
 - Environment variables provided (see below).
 
 ### Tags
 - **latest** : latest stable version.
-- **15.0** : latest 15.0.x version (stable)
-- **14.0** : latest 14.0.x version (oldstable)
+- **17.0** : latest 17.0.x version (stable)
+- **16.0** : latest 17.0.x version (oldstable)
+- **15.0** : latest 15.0.x version (oldstable)
 - **daily** : latest code (daily build).
 
 Other tags than `daily` are built weekly. For security reasons, you should occasionally update the container, even if you have the latest version of Nextcloud. **WARNING : automatic build is not working at the moment.**
@@ -70,7 +74,7 @@ Basically, you can use a database instance running on the host or any other mach
 Pull the image and create a container. `/docker` can be anywhere on your host, this is just an example. Change `MYSQL_ROOT_PASSWORD` and `MYSQL_PASSWORD` values (mariadb). You may also want to change UID and GID for Nextcloud, as well as other variables (see *Environment Variables*).
 
 ```
-docker pull wonderfall/nextcloud:10.0 && docker pull mariadb:10
+docker pull phigi/nextcloud:10.0 && docker pull mariadb:10
 
 docker run -d --name db_nextcloud \
        -v /docker/nextcloud/db:/var/lib/mysql \
@@ -132,7 +136,7 @@ networks:
 
 services:
   nextcloud:
-    image: wonderfall/nextcloud
+    image: phigi/nextcloud
     depends_on:
       - nextcloud-db           # If using MySQL
       - solr                   # If using Nextant
